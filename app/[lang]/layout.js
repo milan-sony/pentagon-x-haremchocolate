@@ -1,5 +1,7 @@
 import { Forum, EB_Garamond, Arima, Josefin_Sans, Mrs_Saint_Delafield } from "next/font/google";
 import { SmoothScroll } from "@/components/motion/smooth-scroll";
+import { Preloader } from "@/components/site/preloader";
+import { preloaderBootScript } from "@/components/site/preloader-boot";
 import { DEFAULT_LOCALE, LOCALES, SITE_URL, getContent, hasLocale, localeMeta } from "@/lib/data";
 import "../globals.css";
 
@@ -56,7 +58,12 @@ export default async function RootLayout({ children, params }) {
     <html
       lang={localeMeta[locale].htmlLang}
       className={`${forum.variable} ${garamond.variable} ${arima.variable} ${josefin.variable} ${delafield.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        {/* decides before first paint whether the preloader shows (see preloader-boot.js) */}
+        <script dangerouslySetInnerHTML={{ __html: preloaderBootScript }} />
+      </head>
       <body>
         <a
           href="#icerik"
@@ -64,7 +71,10 @@ export default async function RootLayout({ children, params }) {
         >
           {ui.skipLink}
         </a>
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          <Preloader />
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );

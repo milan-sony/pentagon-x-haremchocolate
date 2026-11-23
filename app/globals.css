@@ -232,6 +232,72 @@
     transform: translate3d(-50%, 0, 0);
   }
 }
+/* ---------------------------------------------------------------- */
+/* Preloader (components/site/preloader.jsx)                         */
+/* ---------------------------------------------------------------- */
+/* skipped this visit (boot script in <head>): never painted */
+html[data-preloader="skip"] .preloader {
+  display: none;
+}
+/* no scrolling while the curtain is down */
+html.pl-lock {
+  overflow: hidden;
+}
+/* fail-safe: even if JavaScript never runs, the curtain is gone after 5s */
+.preloader {
+  animation: preloader-failsafe 0.4s ease 5s forwards;
+}
+@keyframes preloader-failsafe {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+/* entrance — pure CSS so it starts at first paint, before JavaScript loads */
+.preloader-ring {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: preloader-ring 1.35s cubic-bezier(0.65, 0, 0.35, 1) 0.1s forwards;
+}
+@keyframes preloader-ring {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.preloader-emblem {
+  animation: preloader-emblem 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+}
+@keyframes preloader-emblem {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+.preloader-wordmark {
+  animation: preloader-wordmark 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+}
+@keyframes preloader-wordmark {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+/* gold glint passing across the emblem, masked to its own shape */
+.preloader-shine {
+  -webkit-mask: var(--emblem) center / contain no-repeat;
+  mask: var(--emblem) center / contain no-repeat;
+  background: linear-gradient(105deg, transparent 38%, rgb(255 244 214 / 0.85) 50%, transparent 62%);
+  background-size: 260% 100%;
+  background-position: 130% 0;
+  animation: preloader-shine 1.5s cubic-bezier(0.45, 0, 0.2, 1) 0.55s both;
+}
+@keyframes preloader-shine {
+  to {
+    background-position: -30% 0;
+  }
+}
+
 /* hero slide progress — transform only, no layout per frame */
 @keyframes hero-progress {
   from {

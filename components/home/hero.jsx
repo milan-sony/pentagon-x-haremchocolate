@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Pause, Play } from "lucide-react";
+import { useRevealed } from "@/components/motion/use-revealed";
 import { CtaLink } from "@/components/site/cta-link";
 import { getContent } from "@/lib/data";
 import { cn } from "@/lib/utils";
@@ -21,10 +22,12 @@ export function Hero({ lang }) {
   const sectionRef = useRef(null);
   // autoplay + Ken Burns only while the hero is on screen (saves frames while scrolling)
   const inView = useInView(sectionRef, { amount: 0.15 });
+  // the entrance waits for the preloader curtain (immediately true when it's skipped)
+  const revealed = useRevealed();
 
   const count = slides.length;
   const go = (i) => setIndex((i + count) % count);
-  const running = !paused && !hovering && inView;
+  const running = !paused && !hovering && inView && revealed;
 
   useEffect(() => {
     if (!running) return;
@@ -60,7 +63,7 @@ export function Hero({ lang }) {
           <motion.div
             className="absolute inset-0"
             initial={false}
-            animate={{ scale: i === index && !reduce && inView ? 1 : 1.1 }}
+            animate={{ scale: i === index && !reduce && inView && revealed ? 1 : 1.1 }}
             transition={{ duration: i === index ? autoplayMs / 1000 + 1.6 : 0, ease: "linear" }}
           >
             <Image
@@ -86,8 +89,8 @@ export function Hero({ lang }) {
           <motion.div key={slide.id} className="max-w-5xl" aria-live={running ? "off" : "polite"}>
             <motion.p
               className="mb-5 font-serif text-lg italic text-wc/85 md:text-xl"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={reduce ? false : { opacity: 0, y: 16 }}
+              animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.7, ease: EASE, delay: 0.15 }}
             >
@@ -100,7 +103,7 @@ export function Hero({ lang }) {
                     <motion.span
                       className="inline-block"
                       initial={reduce ? false : { y: "105%" }}
-                      animate={{ y: 0 }}
+                      animate={{ y: revealed ? 0 : "105%" }}
                       exit={{ y: "-105%", transition: { duration: 0.45, ease: EASE } }}
                       transition={{ duration: 1.05, ease: EASE, delay: 0.25 + w * 0.09 }}
                     >
@@ -113,8 +116,8 @@ export function Hero({ lang }) {
               ))}
             </h1>
             <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={reduce ? false : { opacity: 0, y: 18 }}
+              animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
               exit={{ opacity: 0, transition: { duration: 0.3 } }}
               transition={{ duration: 0.8, ease: EASE, delay: 0.6 }}
               className="mt-7 flex flex-col gap-8 sm:flex-row sm:items-center"

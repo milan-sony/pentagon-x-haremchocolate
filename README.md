@@ -17,6 +17,20 @@ Each page sets its own `<html lang>`, title, description, `og:locale` and
 `hreflang` alternates. The EN / TR switcher sits in the header (and in the
 mobile menu); it does a full page load so all page state resets cleanly.
 
+## Preloader
+
+`components/site/preloader.jsx`: the gold HC emblem settles in while a caramel ring
+draws around it, a gold glint passes across, and the wordmark rises; then the
+black panel lifts like a curtain as the hero title rises (`useRevealed`).
+
+- The entrance is pure CSS (`app/globals.css`, "Preloader"), so it starts at first paint.
+- It lifts once fonts and the first hero photo are ready: at least 1.7 s, at most 3.2 s
+  from navigation start (about 1.75 s on a warm load).
+- It shows **once per browser session**. Reloads, EN/TR switches and reduced-motion
+  visitors skip it. `components/site/preloader-boot.js` decides this inline in
+  `<head>` before first paint, so there is no flash.
+- Fail-safe: if JavaScript never runs, a CSS timer removes the overlay after 5 s.
+
 ## Content
 
 All copy, products, prices, links and image paths live in **`lib/data.js`**
