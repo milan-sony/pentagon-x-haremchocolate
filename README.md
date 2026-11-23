@@ -72,11 +72,21 @@ story caption is the brand guide's own English text. Links point to the live
   Caramel `#BC7D1E`, White Chocolate `#DAD4C1`, Chocolate `#BC4917`, Gold (gradient).
 - **Logos / emblem / stickers**: `public/assets/brand/` (transparent PNG, with `-light` variants for dark backgrounds).
 - **Illustrations** (Sedat Girgin): `public/assets/illustrations/`.
-- **Fonts**: Garamond → EB Garamond and Arima Madurai → Arima are the brand's own
-  families. **Algiers, Neutraface Text / Chap Light and Starlit Drive are commercial**,
-  so stand-ins are used (Forum, Josefin Sans, Mrs Saint Delafield). To use the
-  licensed files, load them with `next/font/local` in `app/layout.js` and point the
-  `--font-display`, `--font-sans` and `--font-script` variables at them.
+- **Fonts** (licence status checked 2026-11-23):
+
+  | Brand guide font | On the site | Status |
+  |---|---|---|
+  | Garamond (guide uses Garamond Three) | EB Garamond | free (OFL) equivalent; Garamond Three is commercial |
+  | Arima Madurai | Arima (same family, renamed on Google Fonts) | free (OFL), **light 300 for details** per the guide |
+  | Algiers | Forum (stand-in) | commercial: Ivan Rosenberg (YouWorkForThem / Fontpath) |
+  | Chap Light | Josefin Sans (stand-in) | commercial: Schick Toikka |
+  | Neutraface Text | Josefin Sans (stand-in) | commercial: House Industries (webfont licence) |
+  | Starlit Drive | Mrs Saint Delafield (stand-in) | commercial: Set Sail Studios (webfont licence) |
+
+  Fonts used in the Canva brand guide can't be reused outside Canva under Canva's
+  licence. Once licensed `.woff2` files are supplied, load them with
+  `next/font/local` in `app/[lang]/layout.js` and point the `--font-display`,
+  `--font-sans` and `--font-script` variables at them. No component changes are needed.
 - **"Never use all caps"**: applied site-wide. Nav, buttons and labels use sentence/title case.
 
 ## Open items

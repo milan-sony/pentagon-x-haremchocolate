@@ -42,7 +42,7 @@ export function Categories({ lang }) {
                     />
                   </div>
                 </div>
-                <h3 className="mt-6 font-arima text-lg font-normal leading-snug tracking-normal">{c.name}</h3>
+                <h3 className="mt-6 font-arima text-lg font-light leading-snug tracking-normal">{c.name}</h3>
                 <p className="mt-1 italic text-ink/60">{c.count ? ui.product.countLabel(c.count) : ui.product.emptyCollection}</p>
               </a>
             </RevealItem>

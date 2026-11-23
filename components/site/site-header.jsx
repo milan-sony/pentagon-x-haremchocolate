@@ -204,7 +204,7 @@ function MegaMenu({ open, onEnter, onClose, navigation, ui }) {
               <ul className="grid grid-cols-3 gap-x-8 gap-y-3.5">
                 {mega.links.map((l) => (
                   <li key={l.label}>
-                    <a href={l.href} onClick={onClose} className="font-arima text-[1.0625rem] text-ink/80 transition-colors hover:text-caramel">
+                    <a href={l.href} onClick={onClose} className="font-arima text-[1.0625rem] font-light text-ink/80 transition-colors hover:text-caramel">
                       {l.label}
                     </a>
                   </li>
@@ -266,7 +266,7 @@ function MobileMenu({ tone, lang, navigation, ui }) {
                     <ul className="grid gap-2.5 pb-4 pl-1">
                       {item.mega.links.map((l) => (
                         <li key={l.label}>
-                          <a href={l.href} className="font-arima text-ink/75" onClick={() => setOpen(false)}>
+                          <a href={l.href} className="font-arima font-light text-ink/75" onClick={() => setOpen(false)}>
                             {l.label}
                           </a>
                         </li>

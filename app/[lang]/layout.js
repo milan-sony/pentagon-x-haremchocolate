@@ -9,7 +9,7 @@ import "../globals.css";
 const forum = Forum({ weight: "400", subsets: ["latin", "latin-ext"], variable: "--font-forum", display: "swap" });
 // Garamond (brand)
 const garamond = EB_Garamond({ subsets: ["latin", "latin-ext"], style: ["normal", "italic"], variable: "--font-garamond", display: "swap" });
-// Arima Madurai (brand) — published on Google Fonts as "Arima"
+// Arima Madurai (brand, OFL) — published on Google Fonts as "Arima"; guide: "use light version for details" (300)
 const arima = Arima({ subsets: ["latin", "latin-ext"], variable: "--font-arima-madurai", display: "swap" });
 // Neutraface Text / Chap Light stand-in (UI)
 const josefin = Josefin_Sans({ subsets: ["latin", "latin-ext"], variable: "--font-josefin", display: "swap" });

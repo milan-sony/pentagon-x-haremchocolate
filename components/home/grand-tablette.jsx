@@ -36,7 +36,7 @@ export function GrandTablette({ lang }) {
             <p className="mt-8 max-w-[40ch] text-lg text-ink/80">{f.text}</p>
             <ul className="mt-6 grid gap-4">
               {f.list.map((item) => (
-                <li key={item} className="flex items-center gap-4 border-b border-ink/15 pb-4 font-arima text-xl">
+                <li key={item} className="flex items-center gap-4 border-b border-ink/15 pb-4 font-arima text-xl font-light">
                   <Image src={brand.logos.emblemGold} alt="" width={498} height={499} className="size-7 shrink-0" />
                   {item}
                 </li>

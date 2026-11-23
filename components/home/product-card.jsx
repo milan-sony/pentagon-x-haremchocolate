@@ -50,7 +50,7 @@ export function ProductCard({ product, lang, sizes = "(min-width:1024px) 25vw, (
           </span>
         </div>
         <div className="flex flex-1 flex-col pt-5">
-          <h3 className="font-arima text-lg font-normal leading-snug tracking-normal">{product.name}</h3>
+          <h3 className="font-arima text-lg font-light leading-snug tracking-normal">{product.name}</h3>
           {product.variant ? <p className="mt-0.5 italic leading-snug text-ink/65">{product.variant}</p> : null}
           <p className="ui-label mt-auto pt-3 text-[0.9375rem] tabular-nums text-ink/85">{formatPrice(product.price, lang)}</p>
         </div>

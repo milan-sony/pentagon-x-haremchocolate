@@ -17,7 +17,7 @@ export function CorporateNewsletter({ lang }) {
             {corporate.steps.map((step, n) => (
               <li key={step} className="flex items-baseline gap-5 border-b border-wc/15 pb-4">
                 <span className="font-display text-2xl text-caramel">{n + 1}</span>
-                <span className="font-arima text-lg">{step}</span>
+                <span className="font-arima text-lg font-light">{step}</span>
               </li>
             ))}
           </ol>

@@ -63,7 +63,7 @@ function PlateCard({ product, i, lang }) {
         ) : (
           <div className="mt-5 h-[1.625rem]" aria-hidden="true" />
         )}
-        <h3 className="mt-3 font-arima text-lg font-normal leading-snug tracking-normal text-wc">{product.name}</h3>
+        <h3 className="mt-3 font-arima text-lg font-light leading-snug tracking-normal text-wc">{product.name}</h3>
         {product.variant ? <p className="italic leading-snug text-wc/60">{product.variant}</p> : null}
         <p className="ui-label mt-3 text-[0.9375rem] tabular-nums text-caramel">{formatPrice(product.price, lang)}</p>
       </a>

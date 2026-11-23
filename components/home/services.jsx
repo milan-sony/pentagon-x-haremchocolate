@@ -14,7 +14,7 @@ export function Services({ lang }) {
               <FeatureIcon name={s.icon} className="size-6" strokeWidth={1.4} />
             </span>
             <div>
-              <h3 className="font-arima text-xl font-normal leading-snug tracking-normal">{s.title}</h3>
+              <h3 className="font-arima text-xl font-light leading-snug tracking-normal">{s.title}</h3>
               <p className="mt-1.5 max-w-[34ch] text-ink/70">{s.text}</p>
             </div>
           </RevealItem>
