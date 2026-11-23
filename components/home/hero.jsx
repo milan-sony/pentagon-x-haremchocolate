@@ -45,7 +45,7 @@ export function Hero({ lang }) {
         if (e.key === "ArrowRight") go(index + 1);
         if (e.key === "ArrowLeft") go(index - 1);
       }}
-      className="relative isolate h-[100svh] min-h-[600px] max-h-[1040px] overflow-hidden bg-ink text-wc"
+      className="relative isolate flex min-h-[max(600px,100svh)] flex-col overflow-hidden bg-ink text-wc"
     >
       {/* Slides */}
       {slides.map((s, i) => (
@@ -81,9 +81,9 @@ export function Hero({ lang }) {
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgb(0_0_0/0.78)_0%,rgb(0_0_0/0.55)_38%,rgb(0_0_0/0.12)_68%,transparent_85%)]" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-2/5 bg-gradient-to-t from-ink/80 to-transparent" />
 
-      <div className="container-x flex h-full flex-col justify-end pb-28 pt-40 md:pb-32">
+      <div className="container-x flex flex-1 flex-col justify-end pb-28 pt-36 md:pb-32 lg:pt-48">
         <AnimatePresence mode="wait">
-          <motion.div key={slide.id} className="max-w-3xl" aria-live={running ? "off" : "polite"}>
+          <motion.div key={slide.id} className="max-w-5xl" aria-live={running ? "off" : "polite"}>
             <motion.p
               className="mb-5 font-serif text-lg italic text-wc/85 md:text-xl"
               initial={{ opacity: 0, y: 16 }}

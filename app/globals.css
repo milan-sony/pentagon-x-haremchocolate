@@ -145,13 +145,15 @@
   }
   .display-xl {
     font-family: var(--font-display);
-    font-size: clamp(3rem, 8.2vw, 7.75rem);
+    /* follows the viewport's height too, so wide-but-short screens
+       (laptops, browser windows with toolbars) don't get a towering title */
+    font-size: clamp(3rem, min(8.2vw, 12.5svh), 7.75rem);
     line-height: 0.92;
     letter-spacing: -0.02em;
   }
   /*
    * Type scale (display = Forum / Algiers stand-in):
-   *   display-xl       hero h1            48 → 124px
+   *   display-xl       hero h1            48 → 124px (also capped at 12.5% of viewport height)
    *   display-feature  feature-banner h2  48 →  96px  (Grand Tablette, Cacao Pod)
    *   display-lg       section h2         40 →  72px
    *   display-md       secondary h2       34 →  56px  (corporate, newsletter)
