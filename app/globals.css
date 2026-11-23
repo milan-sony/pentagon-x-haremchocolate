@@ -1,0 +1,272 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "lenis/dist/lenis.css";
+
+/*
+ * Harem Chocolate brand tokens — source: "2-Brand Visual & Social Media.pdf", p.11–12.
+ * Palette is used exactly as specified. Fonts: Garamond and Arima Madurai are the
+ * brand's own families (via Google Fonts); Algiers, Neutraface Text / Chap Light
+ * and Starlit Drive are commercial, so close stand-ins are loaded through the
+ * --font-* variables below. Swap in licensed files by changing those variables.
+ */
+
+@theme inline {
+  /* Brand palette */
+  --color-ink: #000000; /* Black */
+  --color-blueberry: #484680;
+  --color-caramel: #bc7d1e;
+  --color-wc: #dad4c1; /* White Chocolate */
+  --color-chocolate: #bc4917;
+  /* Working tints of White Chocolate (surfaces / hairlines) */
+  --color-wc-soft: #e8e4d8;
+  --color-wc-deep: #c9c2ab;
+
+  /* Typography roles */
+  --font-display: var(--font-forum), "Algiers", Georgia, serif; /* Algiers stand-in */
+  --font-serif: var(--font-garamond), "Garamond", Georgia, serif; /* Garamond */
+  --font-arima: var(--font-arima-madurai), "Arima Madurai", Georgia, serif; /* Arima Madurai */
+  --font-sans: var(--font-josefin), "Neutraface Text", "Chap", system-ui, sans-serif; /* Neutraface / Chap stand-in */
+  --font-script: var(--font-delafield), "Starlit Drive", cursive; /* Starlit Drive stand-in */
+  --font-heading: var(--font-display);
+
+  --ease-silk: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* shadcn token bridge */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+
+  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+  --animate-twinkle: twinkle 3.6s ease-in-out infinite;
+  --animate-float: float 7s ease-in-out infinite;
+}
+
+:root {
+  --radius: 0.25rem;
+  --background: #dad4c1;
+  --foreground: #000000;
+  --card: #e8e4d8;
+  --card-foreground: #000000;
+  --popover: #dad4c1;
+  --popover-foreground: #000000;
+  --primary: #000000;
+  --primary-foreground: #dad4c1;
+  --secondary: #e8e4d8;
+  --secondary-foreground: #000000;
+  --muted: #e8e4d8;
+  --muted-foreground: rgb(0 0 0 / 0.62);
+  --accent: #bc7d1e;
+  --accent-foreground: #000000;
+  --destructive: #bc4917;
+  --border: rgb(0 0 0 / 0.14);
+  --input: rgb(0 0 0 / 0.24);
+  --ring: #bc7d1e;
+  --header-h: 7.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+    /* no double-tap zoom delay; taps show our own :active/:hover states */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-wc text-ink antialiased;
+    font-family: var(--font-serif);
+    /* EB Garamond has a small x-height: 17px on phones → 19px on desktop */
+    font-size: clamp(1.0625rem, 0.98rem + 0.25vw, 1.1875rem);
+    line-height: 1.7;
+    font-feature-settings: "kern", "liga", "onum";
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--color-caramel);
+    color: #000;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-caramel);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Small UI type (nav, buttons, meta). Brand rule: never all caps. */
+  .ui-label {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+  }
+  .container-x {
+    width: 100%;
+    max-width: 88rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+  }
+  .section-y {
+    padding-block: clamp(4.5rem, 10vw, 9rem);
+  }
+  .display-xl {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8.2vw, 7.75rem);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+  }
+  /*
+   * Type scale (display = Forum / Algiers stand-in):
+   *   display-xl       hero h1            48 → 124px
+   *   display-feature  feature-banner h2  48 →  96px  (Grand Tablette, Cacao Pod)
+   *   display-lg       section h2         40 →  72px
+   *   display-md       secondary h2       34 →  56px  (corporate, newsletter)
+   * Card titles use Arima at 18px, service titles 20px, store names 28px.
+   */
+  .display-lg {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 0.98;
+  }
+  .display-feature {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6.6vw, 6rem);
+    line-height: 0.92;
+  }
+  .display-md {
+    font-family: var(--font-display);
+    font-size: clamp(2.125rem, 3.9vw, 3.5rem);
+    line-height: 1.02;
+  }
+  /* Enlarges the touch area to ≥ 44px without changing layout */
+  .tap-target {
+    position: relative;
+  }
+  .tap-target::after {
+    content: "";
+    position: absolute;
+    inset: 50% 50%;
+    width: max(100%, 2.75rem);
+    height: max(100%, 2.75rem);
+    transform: translate(-50%, -50%);
+  }
+  .gold-text {
+    background: linear-gradient(120deg, #a77a2c 0%, #f1e2ad 42%, #c99a45 70%, #8c6a2f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .gold-rule {
+    background: linear-gradient(90deg, transparent, #c99a45 20%, #f1e2ad 50%, #c99a45 80%, transparent);
+  }
+  /* Animated underline used by text links */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 100% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    padding-bottom: 0.2em;
+    transition: background-size 0.5s var(--ease-silk);
+  }
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 0% 1px;
+    background-position: 100% 100%;
+  }
+  .link-draw {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    padding-bottom: 0.15em;
+    transition: background-size 0.45s var(--ease-silk);
+  }
+  .link-draw:hover,
+  .link-draw:focus-visible,
+  .group:hover .link-draw {
+    background-size: 100% 1px;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+/* hero slide progress — transform only, no layout per frame */
+@keyframes hero-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.78) rotate(18deg);
+  }
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
